@@ -2,7 +2,11 @@
   home works!
 </p>
 
-
-<div *ngFor="let photo of photos" class="container text-center">
-  <img src="{{ photo }}" />
+<div class="container text-center">
+  <div *ngFor="let photo of photos" class="col-4">
+    <div *ngIf="photo.num % 3 === 0; then thenBlock"></div>
+    <ng-template #thenBlock><hr /></ng-template>
+      <span>{{photo.name}}</span>
+      <img src="{{photo.url}}" alt="{{photo.name}}" width="150"/>
+  </div>
 </div>

@@ -17,12 +17,13 @@ export class HomeComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.http.get(FLICKR_REQUEST_URL).subscribe(data => {
+      console.log(data);
       var photos = data['photos']['photo'];
       for (let i in photos) {
         let photo = photos[i];
         let photoUrl = this.imageUrlBuilder(photo['farm'], photo['server'], photo['id'], photo['secret']);
         //console.log(photoUrl);
-        this.photos.push(photoUrl);
+        this.photos.push({url: photoUrl, name: photo['title'], num: i});
       }
     });
   }
