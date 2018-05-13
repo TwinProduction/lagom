@@ -3,4 +3,9 @@
 body {
   background-color: #EEE;
   font-family: Nixie One;
+  min-width: 600px;
+}
+
+.title {
+  height: 50px;
 }
