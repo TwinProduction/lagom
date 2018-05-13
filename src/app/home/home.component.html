@@ -2,13 +2,29 @@
   home works!
 </p>
 
+<p class="text-center">
+  There is {{photoRows.length}} rows of photo
+</p>
+
 <div class="container-fluid text-center">
+  <!--
   <div class="row">
-    <div *ngFor="let photo of photos; let index = index" class="col-4" style="margin-bottom:20px;">
+    <div *ngFor="let photo of photoRows; let index = index" class="col-4">
       <div class="title">
         <h5>{{photo.name}}</h5>
       </div>
       <img src="{{photo.url}}" alt="{{photo.name}}" class="rounded img-fluid" />
     </div>
   </div>
+  -->
+
+  <div *ngFor="let row of photoRows;" class="row">
+    <div *ngFor="let photo of row;" class="col-4">
+      <div class="title">
+        <h5>{{photo.name}}</h5>
+      </div>
+      <img src="{{photo.url}}" alt="{{photo.name}}" class="rounded img-fluid" />
+    </div>
+  </div>
+
 </div>
