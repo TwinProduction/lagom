@@ -8,4 +8,7 @@ body {
 
 .title {
   height: 50px;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 130%;
 }
