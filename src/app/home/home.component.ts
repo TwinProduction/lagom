@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 
@@ -13,6 +13,9 @@ export class HomeComponent implements OnInit {
   photoRows:object[] = [];
   currentPage:number = 1;
   maxPage:number = 1;
+
+  galleryClass:string = "";
+
 
   constructor(private http: HttpClient) {
     this.fetchPhotos();
@@ -30,15 +33,17 @@ export class HomeComponent implements OnInit {
       let currentRow = [];
       for (let i in photos) {
         let photo = photos[i];
-        let photoUrl = this.imageUrlBuilder(photo['farm'], photo['server'], photo['id'], photo['secret']);
+        let imageUrl = this.imageUrlBuilder(photo['farm'], photo['server'], photo['id'], photo['secret']);
+        let postUrl = this.postLinkBuilder(photo['id'])
         if (currentRow.length < 2 && +i !== photos.length - 1) {
-          currentRow.push({url: photoUrl, name: photo['title']});
+          currentRow.push({imageUrl: imageUrl, name: photo['title'], postUrl: postUrl});
         } else {
-          currentRow.push({url: photoUrl, name: photo['title']});
+          currentRow.push({imageUrl: imageUrl, name: photo['title'], postUrl: postUrl});
           this.photoRows.push(currentRow);
           currentRow = [];
         }
       }
+      this.galleryClass = "";
     });
   }
 
@@ -47,12 +52,11 @@ export class HomeComponent implements OnInit {
     return "https://api.flickr.com/services/rest/?method=flickr.people.getPhotos" +
       "&api_key=580e51fb0ef83cdbf92411eb93ecf005" +
       "&user_id=141118288%40N08" +
-      "&per_page=20" +
+      "&per_page=12" +
       "&page="+ page +
       "&format=json" +
       "&nojsoncallback=1"
   }
-
 
 
   imageUrlBuilder(farmId, serverId, id, secret) {
@@ -60,14 +64,21 @@ export class HomeComponent implements OnInit {
   }
 
 
+  postLinkBuilder(id) {
+    return "https://www.flickr.com/photos/141118288%40N08/"+id+"/";
+  }
+
+
   nextPage() {
     this.currentPage++;
+    this.galleryClass = "fade";
     this.fetchPhotos();
   }
 
 
   prevPage() {
     this.currentPage--;
+    this.galleryClass = "fade";
     this.fetchPhotos();
   }
 

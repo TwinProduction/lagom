@@ -1,5 +1,18 @@
 #page-control {
   padding: 5px;
-  background-color: #CFC;
-  border-bottom: 2px solid #BFB;
+  background-color: #CCFFCC;
+  border-bottom: 1px solid #BFB;
+  transition: all 300ms;
+}
+
+#page-control:hover {
+  background-color: #C6FFC6;
+}
+
+#gallery img {
+  transition: all 300ms;
+}
+
+#gallery img:hover {
+  opacity: 0.8;
 }

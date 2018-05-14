@@ -11,13 +11,15 @@
     </div>
   </div>
 
-  <div *ngFor="let row of photoRows" class="row">
+  <div *ngFor="let row of photoRows" class="row {{galleryClass}}" id="gallery">
     <div *ngFor="let photo of row" class="col-4">
       <div>
         <div class="title">
           {{photo.name}}
         </div>
-        <img src="{{photo.url}}" alt="{{photo.name}}" class="rounded img-fluid" />
+        <a href="{{photo.postUrl}}" target="_blank">
+          <img src="{{photo.imageUrl}}" alt="{{photo.name}}" class="rounded img-fluid" />
+        </a>
       </div>
     </div>
   </div>
