@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div *ngFor="let row of photoRows" class="row {{galleryClass}}" id="gallery">
+  <div *ngFor="let row of photoRows" class="row {{galleryClass}} [@images]" id="gallery">
     <div *ngFor="let photo of row" class="col-4">
       <div>
         <div class="title">

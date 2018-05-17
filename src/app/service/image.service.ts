@@ -1,0 +1,36 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs/internal/Observable";
+
+
+@Injectable()
+export class ImageService {
+
+  constructor(private http: HttpClient) {}
+
+
+  public fetchPhotosOnPage(page: number): Observable<any> {
+    return this.http.get(this.getApiUrl(page));
+  }
+
+
+  public getApiUrl(page) {
+    return "https://api.flickr.com/services/rest/?method=flickr.people.getPhotos" +
+      "&api_key=580e51fb0ef83cdbf92411eb93ecf005" +
+      "&user_id=141118288%40N08" +
+      "&per_page=12" +
+      "&page="+ page +
+      "&format=json" +
+      "&nojsoncallback=1"
+  }
+
+
+  public imageUrlBuilder(farmId, serverId, id, secret) {
+    return "https://farm"+farmId+".staticflickr.com/"+serverId+"/"+id+"_"+secret+".jpg";
+  }
+
+
+  public postLinkBuilder(id) {
+    return "https://www.flickr.com/photos/141118288%40N08/"+id+"/";
+  }
+}

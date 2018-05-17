@@ -9,6 +9,8 @@ import { AboutComponent } from './about/about.component';
 import {HttpClientModule} from "@angular/common/http";
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ImageService} from "./service/image.service";
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,40 +1,38 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-
+import {Component, OnInit} from '@angular/core';
+import {ImageService} from "../service/image.service";
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
-  photoRows:object[] = [];
-  currentPage:number = 1;
-  maxPage:number = 1;
+  photoRows: object[] = [];
+  currentPage: number = 1;
+  maxPage: number = 1;
+  galleryClass: string = "";
 
-  galleryClass:string = "";
 
-
-  constructor(private http: HttpClient) {
-    this.fetchPhotos();
-  }
-
-  ngOnInit() {
+  constructor(private imageService: ImageService) {
+    this.getPhotos();
   }
 
 
-  fetchPhotos() {
-    this.http.get(this.getApiUrl(this.currentPage)).subscribe(data => {
+  ngOnInit() {}
+
+
+  getPhotos() {
+    this.imageService.fetchPhotosOnPage(this.currentPage).subscribe(data => {
       this.photoRows = [];
       let photos = data['photos']['photo'];
       this.maxPage = data['photos']['pages'];
       let currentRow = [];
       for (let i in photos) {
         let photo = photos[i];
-        let imageUrl = this.imageUrlBuilder(photo['farm'], photo['server'], photo['id'], photo['secret']);
-        let postUrl = this.postLinkBuilder(photo['id'])
+        let imageUrl = this.imageService.imageUrlBuilder(photo['farm'], photo['server'], photo['id'], photo['secret']);
+        let postUrl = this.imageService.postLinkBuilder(photo['id']);
         if (currentRow.length < 2 && +i !== photos.length - 1) {
           currentRow.push({imageUrl: imageUrl, name: photo['title'], postUrl: postUrl});
         } else {
@@ -48,38 +46,17 @@ export class HomeComponent implements OnInit {
   }
 
 
-  getApiUrl(page) {
-    return "https://api.flickr.com/services/rest/?method=flickr.people.getPhotos" +
-      "&api_key=580e51fb0ef83cdbf92411eb93ecf005" +
-      "&user_id=141118288%40N08" +
-      "&per_page=12" +
-      "&page="+ page +
-      "&format=json" +
-      "&nojsoncallback=1"
-  }
-
-
-  imageUrlBuilder(farmId, serverId, id, secret) {
-    return "https://farm"+farmId+".staticflickr.com/"+serverId+"/"+id+"_"+secret+".jpg";
-  }
-
-
-  postLinkBuilder(id) {
-    return "https://www.flickr.com/photos/141118288%40N08/"+id+"/";
-  }
-
-
   nextPage() {
     this.currentPage++;
     this.galleryClass = "fade";
-    this.fetchPhotos();
+    this.getPhotos();
   }
 
 
   prevPage() {
     this.currentPage--;
     this.galleryClass = "fade";
-    this.fetchPhotos();
+    this.getPhotos();
   }
 
 }
