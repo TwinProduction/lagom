@@ -18,7 +18,7 @@
           {{photo.name}}
         </div>
         <a href="{{photo.postUrl}}" target="_blank">
-          <img src="{{photo.imageUrl}}" alt="{{photo.name}}" class="rounded img-fluid" />
+          <img src="{{photo.imageUrl}}" alt="{{photo.name}}" class="rounded img-fluid" (mouseenter)="mouseEnter($event)" (mouseleave)="mouseLeave($event)" />
         </a>
       </div>
     </div>

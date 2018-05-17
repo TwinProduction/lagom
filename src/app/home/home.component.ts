@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ImageService} from "../service/image.service";
+import {Photo} from "../model/photo.model";
 
 
 @Component({
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   maxPage: number = 1;
   galleryClass: string = "";
+  galleryImagesClass: string ="";
 
 
   constructor(private imageService: ImageService) {
@@ -25,24 +27,34 @@ export class HomeComponent implements OnInit {
 
   getPhotos() {
     this.imageService.fetchPhotosOnPage(this.currentPage).subscribe(data => {
-      this.photoRows = [];
-      let photos = data['photos']['photo'];
+      let photos: Photo[] = data['photos']['photo'];
       this.maxPage = data['photos']['pages'];
+      this.photoRows = [];
       let currentRow = [];
       for (let i in photos) {
         let photo = photos[i];
-        let imageUrl = this.imageService.imageUrlBuilder(photo['farm'], photo['server'], photo['id'], photo['secret']);
-        let postUrl = this.imageService.postLinkBuilder(photo['id']);
+        let imageUrl = this.imageService.imageUrlBuilder(photo.farm, photo.server, photo.id, photo.secret);
+        let postUrl = this.imageService.postLinkBuilder(photo.id);
         if (currentRow.length < 2 && +i !== photos.length - 1) {
-          currentRow.push({imageUrl: imageUrl, name: photo['title'], postUrl: postUrl});
+          currentRow.push({imageUrl: imageUrl, name: photo.title, postUrl: postUrl, id: photo.id});
         } else {
-          currentRow.push({imageUrl: imageUrl, name: photo['title'], postUrl: postUrl});
+          currentRow.push({imageUrl: imageUrl, name: photo.title, postUrl: postUrl, id: photo.id});
           this.photoRows.push(currentRow);
           currentRow = [];
         }
       }
       this.galleryClass = "";
     });
+  }
+
+
+  mouseEnter(event) {
+    event.target.style.boxShadow = "0 0 20px #333";
+  }
+
+
+  mouseLeave(event) {
+    event.target.style.boxShadow = "initial";
   }
 
 
