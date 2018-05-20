@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   maxPage: number = 1;
   galleryClass: string = "";
-  galleryImagesClass: string ="";
 
 
   constructor(private imageService: ImageService) {
@@ -50,11 +49,13 @@ export class HomeComponent implements OnInit {
 
   mouseEnter(event) {
     event.target.style.boxShadow = "0 0 20px #333";
+    event.target.style.transform = "scale(1.01)";
   }
 
 
   mouseLeave(event) {
     event.target.style.boxShadow = "initial";
+    event.target.style.transform = "";
   }
 
 
