@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {environment} from "../environments/environment";
 
 
 @Component({
@@ -8,6 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  environment:object = environment;
   title:string = 'app';
 
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
+import {environment} from "../../environments/environment";
+
 
 
 @Injectable()
@@ -16,7 +18,7 @@ export class ImageService {
 
   public getApiUrl(page) {
     return "https://api.flickr.com/services/rest/?method=flickr.people.getPhotos" +
-      "&api_key=580e51fb0ef83cdbf92411eb93ecf005" +
+      `&api_key=${environment.apiKey}` +
       "&user_id=141118288%40N08" +
       "&per_page=12" +
       "&page="+ page +
