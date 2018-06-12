@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ImageService} from "./service/image.service";
+import { BloggersComponent } from './bloggers/bloggers.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {ImageService} from "./service/image.service";
     HomeComponent,
     AboutComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    BloggersComponent
   ],
   imports: [
     BrowserModule,
