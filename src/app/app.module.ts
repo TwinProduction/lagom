@@ -6,7 +6,7 @@ import {RouterModule} from "@angular/router";
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import {HttpClientModule} from "@angular/common/http";
-import { MenuComponent } from './menu/menu.component';
+import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ImageService} from "./service/image.service";
@@ -17,7 +17,7 @@ import { BloggersComponent } from './bloggers/bloggers.component';
     AppComponent,
     HomeComponent,
     AboutComponent,
-    MenuComponent,
+    HeaderComponent,
     FooterComponent,
     BloggersComponent
   ],
