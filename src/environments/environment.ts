@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiKey: "FLICKR_API_KEY"
+  apiKey: "580e51fb0ef83cdbf92411eb93ecf005"
 };

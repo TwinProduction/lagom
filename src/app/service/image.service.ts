@@ -16,7 +16,7 @@ export class ImageService {
   }
 
 
-  public getApiUrl(page) {
+  public getApiUrl(page: number) {
     return "https://api.flickr.com/services/rest/?method=flickr.people.getPhotos" +
       `&api_key=${environment.apiKey}` +
       "&user_id=141118288%40N08" +
@@ -27,12 +27,12 @@ export class ImageService {
   }
 
 
-  public imageUrlBuilder(farmId, serverId, id, secret) {
+  public imageUrlBuilder(farmId, serverId, id, secret): string {
     return "https://farm"+farmId+".staticflickr.com/"+serverId+"/"+id+"_"+secret+".jpg";
   }
 
 
-  public postLinkBuilder(id) {
+  public postLinkBuilder(id: number): string {
     return "https://www.flickr.com/photos/141118288%40N08/"+id+"/";
   }
 }
