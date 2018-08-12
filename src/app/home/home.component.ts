@@ -16,12 +16,12 @@ export class HomeComponent implements OnInit {
   galleryClass: string = "";
 
 
-  constructor(private imageService: ImageService) {
+  constructor(private imageService: ImageService) {}
+
+
+  ngOnInit() {
     this.getPhotos();
   }
-
-
-  ngOnInit() {}
 
 
   getPhotos() {
